@@ -74,7 +74,7 @@ module.exports = function(grunt){
 
 
     // 开发
-    grunt.registerTask("dev", ["watch"]);
+    grunt.registerTask("dev", ["default", "watch"]);
 
     
 

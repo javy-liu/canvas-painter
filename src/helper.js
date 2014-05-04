@@ -1,6 +1,10 @@
 // 事件基础
 define([
-	
-], function(  ) {
+	"./core",
+	"./helper/event"
+], function( Painter, Event ) {
 
+	Painter.extend(Event);
+	
+	return Painter;
 });

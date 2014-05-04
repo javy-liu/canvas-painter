@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
 	<title>测试</title>
+	<style type="text/css">
+	body{
+		margin: 0px;
+	}
+	canvas{
+		border: 1px dashed black;
+	}
+	</style>
 </head>
 <body>
 <canvas id="painter"></canvas>
-<script type="text/javascript" src="../dist/canvas-painter.js"></script>
-<script type="text/javascript" src="main.js"></script>
+<button id="line">划线</button>
+<button id="brush">刷子</button>
+<button id="color">选色</button>
+<button id="triangle">三角形</button>
+<button id="rectangle">矩形</button>
+<button id="round">圆形</button>
+<!-- <script type="text/javascript" src="../dist/canvas-painter.js"></script> -->
+<!-- <script type="text/javascript" src="main.js"></script> -->
+
+<script type="text/javascript" src="compatibility.js"></script>
+<script type="text/javascript" src="pdf.js"></script>
+
+<script type="text/javascript">
+PDFJS.disableWorker = true;
+
+PDFJS.getDocument("2.pdf").then(function getPdfHelloWorld(pdf) {
+      //
+      // Fetch the first page
+      //
+      pdf.getPage(1).then(function getPageHelloWorld(page) {
+        var scale = 2;
+        var viewport = page.getViewport(scale);
+
+        //
+        // Prepare canvas using PDF page dimensions
+        //
+        var canvas = document.getElementById('painter');
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        console.log(page);
+        console.log(viewport);
+        //
+        // Render PDF page into canvas context
+        //
+        page.render({canvasContext: context, viewport: viewport});
+      });
+    });
+
+</script>
 </body>
 </html>
